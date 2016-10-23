@@ -94,19 +94,8 @@ get_relative_path () {
 }
 
 get_dnsdomainname () {
-    # Wrap dnsdomainname if it's not present (on MacOS X)
-
-    if type dnsdomainname > /dev/null 2>&1 ; then
-        dnsdomainname
-    else
-        local fqdn
-        fqdn="$(hostname -f)"
-        if [[ ${fqdn} == *.* ]] ; then
-            echo "${fqdn#*.}"
-        else
-            echo ""
-        fi
-    fi
+    # Use FQDN hostname as DNS name (for "mycloud" project)
+    echo "$(hostname -f)"
 }
 
 chmod_idempotent () {
